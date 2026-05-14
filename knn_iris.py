@@ -4,6 +4,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, accuracy_score
 
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
 # 1. Caricamento del dataset
 # Assicurati di avere il file 'Iris.csv' nella stessa cartella dello script
 df = pd.read_csv('Iris.csv')
@@ -35,3 +38,27 @@ y_pred = knn.predict(X_test_scaled)
 print(f"Accuratezza del modello: {accuracy_score(y_test, y_pred):.2f}\n")
 print("Report di Classificazione:")
 print(classification_report(y_test, y_pred))
+
+
+# 7. GENERAZIONE E SALVATAGGIO DELLA MATRICE COLORATA
+
+
+# Calcola la matrice numerica incrociando i valori reali e le previsioni
+cm = confusion_matrix(y_test, y_pred)
+
+# Crea l'oggetto grafico associando i numeri alle etichette delle specie
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=knn.classes_)
+
+# Disegna la matrice applicando una mappa di calore blu (cmap='Blues')
+disp.plot(cmap='Blues')
+
+# Imposta il titolo del grafico
+plt.title("Matrice di Confusione - k-NN")
+
+# Salva fisicamente il grafico come immagine PNG
+plt.savefig('matrice_confusione.png', dpi=300, bbox_inches='tight')
+
+# Chiude l'oggetto grafico per liberare la memoria RAM del sistema
+plt.close()
+
+print("\nImmagine generata con successo! Cerca il file 'matrice_confusione.png' nella cartella.")
