@@ -49,16 +49,13 @@ cm = confusion_matrix(y_test, y_pred)
 # Crea l'oggetto grafico associando i numeri alle etichette delle specie
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=knn.classes_)
 
-# Disegna la matrice applicando una mappa di calore blu (cmap='Blues')
-disp.plot(cmap='Blues')
+# Disegna la matrice
+disp.plot(cmap='Reds')
 
-# Imposta il titolo del grafico
 plt.title("Matrice di Confusione - k-NN")
 
-# Salva fisicamente il grafico come immagine PNG
 plt.savefig('matrice_confusione.png', dpi=300, bbox_inches='tight')
 
-# Chiude l'oggetto grafico per liberare la memoria RAM del sistema
 plt.close()
 
-print("\nImmagine generata con successo! Cerca il file 'matrice_confusione.png' nella cartella.")
+print("\nMatrice di confusione generata con successo.")
